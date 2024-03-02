@@ -88,8 +88,8 @@ digit_only = lambda text: ''.join(filter(str.isdigit, text))
 comment_list = []
 last_save_loc = 0
 # 检测输出路径是否存在
-if not os.path.exists('output'):
-    os.mkdir('output')
+if not os.path.exists(output_path):
+    os.mkdir(output_path)
 for i in range(page_num):
     start_time = time.time()
     print(f'Page {i+1} of {page_num}')
@@ -139,7 +139,9 @@ for i in range(page_num):
 json_str = json.dumps(comment_list, indent=4)
 with open(f'{output_path}/comment_data_{last_save_loc+1}-{i+1}.json', 'w') as json_file:
     json_file.write(json_str)
-print(f"Dump comment_data_{last_save_loc+1}-{i+1}.json complete.")
+print(f"Dump comment_data_{last_save_loc+1}-{i+1}.json complete.\nALL comment exported.")
+
+driver.quit() # 关闭浏览器
         
 
 
