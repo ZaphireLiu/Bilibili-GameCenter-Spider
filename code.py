@@ -18,7 +18,7 @@ output_path = 'output\\'
 # 游戏页面id，即 https://www.biligame.com/detail/?id=107825 网址中id=后面的数字
 game_page_id = 107825 # 测试游戏：来自星尘
 # 设置Edge WebDriver的路径，如果写入环境变量则可以忽略，但需要改变后面启动WebDriver部分的参数
-edge_driver_path = "D:\\Software\\Tools\\edgedriver_win64\\msedgedriver.exe"
+edge_driver_path = "path_to_edge_driver"
 # 多少页保存一个文件
 save_interval = 20
 
