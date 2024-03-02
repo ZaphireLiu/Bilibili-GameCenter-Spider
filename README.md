@@ -1,7 +1,9 @@
 # Bilibili-GameCenter-Spider
 B站游戏中心评价区爬虫
 
-简单练习一下Python爬虫，因为B站游戏中心评价区的api中引入了`request_id`和`appkey`两个校验值，不好用request的方法直接获取评价区内容，所以用了`selenium`来获取具体内容
+简单练习一下Python爬虫，因为B站游戏中心评价区的api中引入了`request_id`和`appkey`两个校验值，不好用request的方法直接获取评价区内容，所以用了`selenium`来获取具体内容。
+
+使用Edge浏览器，需要提前下载[Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/?form=MA13LH)，通过简单的修改应该也适用于其他浏览器。
 
 ## 使用的库
 
@@ -39,4 +41,4 @@ bs4
 
 ## 存在问题
 
-尚不清楚是我的代码问题还是库的问题，在其中几次运行中，seleniumwire用于抓取HTML源代码的代理线程会报错，但实际上不影响使用
+尚不清楚是我的代码问题还是库的问题，在其中几次运行中，seleniumwire用于抓取HTML源代码的代理线程会报错，但实际上不影响使用。
