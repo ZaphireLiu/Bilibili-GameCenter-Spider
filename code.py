@@ -14,14 +14,13 @@ from bs4 import BeautifulSoup
 # %%
 ''' 参数设置 '''
 # 输出路径
-output_path = 'output\\'
+output_path = 'output'
 # 游戏页面id，即 https://www.biligame.com/detail/?id=107825 网址中id=后面的数字
 game_page_id = 107825 # 测试游戏：来自星尘
 # 设置Edge WebDriver的路径，如果写入环境变量则可以忽略，但需要改变后面启动WebDriver部分的参数
-edge_driver_path = "path_to_edge_driver"
+edge_driver_path = "PATH_TO_WEBDRIVER"
 # 多少页保存一个文件
 save_interval = 20
-
 
 # %%
 # 查找特定的元素
@@ -83,7 +82,6 @@ while cache_html == comment_area_html:
     cache_html   = comment_area.get_attribute('outerHTML')
     time.sleep(0.2)
 
-
 # %%
 # page_num = 2 # 手动设置爬取页数
 digit_only = lambda text: ''.join(filter(str.isdigit, text))
@@ -98,7 +96,7 @@ for i in range(page_num):
     # 保存至json文件
     if i % save_interval == 0 and len(comment_list) != 0:
         json_str = json.dumps(comment_list, indent=4)
-        with open(f'{output_path}comment_data_{last_save_loc+1}-{i}.json', 'w') as json_file:
+        with open(f'{output_path}/comment_data_{last_save_loc+1}-{i}.json', 'w') as json_file:
             json_file.write(json_str)
         print(f"Dump comment_data_{last_save_loc+1}-{i}.json complete.")
         last_save_loc = i
@@ -119,12 +117,13 @@ for i in range(page_num):
         comment_log['down_count'] = int(comment_log['down_count']) if len(comment_log['down_count']) > 0 else 0
         comment_log['star_num']   = len(comment.find_all(name='svg', class_='bui-icon bui-icon-star filled'))
         comment_list.append(comment_log)
-        print(comment_log['userid'], comment_log['text'])
+        print(comment_log['userid'], f"{comment_log['star_num']}/5", comment_log['time'])
+        print(comment_log['text'])
     # 随机等待一段时间模拟用户行为防止被ban
-    if time.time() - start_time > 4:
-        time.sleep(random.uniform(0, 3))
+    if time.time() - start_time > 2:
+        time.sleep(random.uniform(0, 2))
     else:
-        time.sleep(random.uniform(2, 5))
+        time.sleep(random.uniform(1, 3))
         
     # 下一页
     if i == page_num - 1: break
@@ -138,7 +137,7 @@ for i in range(page_num):
 
 # 保存最后的部分
 json_str = json.dumps(comment_list, indent=4)
-with open(f'{output_path}comment_data_{last_save_loc+1}-{i+1}.json', 'w') as json_file:
+with open(f'{output_path}/comment_data_{last_save_loc+1}-{i+1}.json', 'w') as json_file:
     json_file.write(json_str)
 print(f"Dump comment_data_{last_save_loc+1}-{i+1}.json complete.")
         
